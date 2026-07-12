@@ -1,0 +1,38 @@
+{
+  "name": "@helpbento/capacitor-widget",
+  "version": "0.1.0",
+  "description": "HelpBento AI chat widget for Capacitor apps (iOS, Android, web)",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "keywords": [
+    "capacitor",
+    "plugin",
+    "helpbento",
+    "chat",
+    "support",
+    "widget"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HelpBento/helpbento-capacitor.git"
+  },
+  "peerDependencies": {
+    "@capacitor/core": ">=5.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/core": "^7.0.0",
+    "typescript": "~5.9.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
