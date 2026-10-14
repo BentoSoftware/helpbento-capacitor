@@ -24,7 +24,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HelpBento/helpbento-capacitor.git"
+    "url": "https://github.com/BentoSoftware/helpbento-capacitor.git"
   },
   "peerDependencies": {
     "@capacitor/core": ">=5.0.0"
