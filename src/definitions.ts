@@ -38,6 +38,26 @@ export interface HelpBentoIdentifyOptions {
   hmac?: string;
 }
 
+/** Options for {@link HelpBentoPlugin.submitSupport}. */
+export interface HelpBentoSubmitSupportOptions {
+  /** Short title for the request (max 200 characters). */
+  subject?: string;
+  /** The user's description of the problem (required, max 5000 characters). */
+  message: string;
+  /**
+   * Extra form answers shown on the request in the HelpBento inbox, e.g.
+   * `{ reason: 'Billing' }`. Flat values only (string, number, boolean);
+   * at most 20 keys, string values up to 500 characters.
+   */
+  customFields?: Record<string, string | number | boolean>;
+}
+
+/** Result of {@link HelpBentoPlugin.submitSupport}. */
+export interface HelpBentoSubmitSupportResult {
+  /** The id of the new support request. */
+  requestId: string;
+}
+
 /** Payload of the 'message' event (an assistant reply completed). */
 export interface HelpBentoMessageEvent {
   /** The assistant's reply text (markdown). */
@@ -83,6 +103,14 @@ export interface HelpBentoPlugin {
 
   /** Whether the chat panel is currently open. */
   isOpen(): Promise<{ isOpen: boolean }>;
+
+  /**
+   * Send your own in-app support form straight to the HelpBento inbox,
+   * without opening the chat panel (works with the launcher hidden).
+   * Requires a verified identify() call with `email` and `hmac`. Rejects
+   * (and fires the 'error' event) when the submission is refused.
+   */
+  submitSupport(options: HelpBentoSubmitSupportOptions): Promise<HelpBentoSubmitSupportResult>;
 
   addListener(
     eventName: 'open' | 'close',

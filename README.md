@@ -39,6 +39,13 @@ const handle = await HelpBento.addListener('message', (event) => {
 // Open programmatically (e.g. from your own Help button)
 await HelpBento.open();
 
+// Your own support form (no chat panel opens; needs identify() with email + hmac)
+const { requestId } = await HelpBento.submitSupport({
+  subject: "Can't export invoices",
+  message: 'Clicking Export does nothing.',
+  customFields: { reason: 'Billing' },
+});
+
 // On logout
 await HelpBento.clearUser();
 ```
@@ -52,6 +59,7 @@ await HelpBento.clearUser();
 | `clearUser()` | Clear identity on logout. |
 | `open()` / `close()` / `toggle()` | Control the chat panel. |
 | `isOpen()` | Resolves `{ isOpen: boolean }`. |
+| `submitSupport(request)` | Send your own in-app support form to the HelpBento inbox without opening the chat. `message` required; optional `subject`, `customFields`. Resolves `{ requestId }`. Needs a verified `identify()` with `email` + `hmac`. |
 | `destroy()` | Tear down the widget; `init()` may be called again. |
 | `addListener(event, cb)` | Events: `open`, `close`, `message`, `error`. |
 | `removeAllListeners()` | Remove all plugin listeners. |

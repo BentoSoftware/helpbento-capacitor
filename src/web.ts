@@ -4,6 +4,8 @@ import type {
   HelpBentoIdentifyOptions,
   HelpBentoInitOptions,
   HelpBentoPlugin,
+  HelpBentoSubmitSupportOptions,
+  HelpBentoSubmitSupportResult,
 } from './definitions';
 
 const DEFAULT_SCRIPT_URL = 'https://app.helpbento.com/widget.js';
@@ -26,6 +28,7 @@ interface HelpBentoWidgetGlobal {
   toggle(): void;
   destroy(): void;
   isOpen(): boolean;
+  submitSupport(request: HelpBentoSubmitSupportOptions): Promise<HelpBentoSubmitSupportResult>;
   on(event: string, callback: (payload?: unknown) => void): void;
   off(event: string, callback?: (payload?: unknown) => void): void;
 }
@@ -107,6 +110,12 @@ export class HelpBentoWeb extends WebPlugin implements HelpBentoPlugin {
 
   async isOpen(): Promise<{ isOpen: boolean }> {
     return { isOpen: window.HelpBento?.isOpen() ?? false };
+  }
+
+  async submitSupport(
+    options: HelpBentoSubmitSupportOptions,
+  ): Promise<HelpBentoSubmitSupportResult> {
+    return (await this.requireWidget()).submitSupport(options);
   }
 
   /**
