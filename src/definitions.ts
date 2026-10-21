@@ -31,9 +31,10 @@ export interface HelpBentoIdentifyOptions {
   /** User's display name. */
   name?: string;
   /**
-   * HMAC-SHA256 signature generated on YOUR server over "<userId>:<email>"
-   * (or the userId alone when no email is passed). Required for the user to
-   * show as verified on support requests.
+   * The `v1.`-prefixed HMAC-SHA256 signature YOUR server generates over
+   * "<userId>\n<email>" (empty email after the newline when none is passed) —
+   * see the HelpBento widget integration guide. Passed through as-is.
+   * Required for the user to show as verified on support requests.
    */
   hmac?: string;
 }
